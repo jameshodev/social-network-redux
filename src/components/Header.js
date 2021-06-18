@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.css';
 import logoIcon from '../bizchitchat_logo-h.png';
 import SearchIcon from '@material-ui/icons/Search';
@@ -8,10 +8,25 @@ import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import ForumRoundedIcon from '@material-ui/icons/ForumRounded';
 import NotificationsActiveRoundedIcon from '@material-ui/icons/NotificationsActiveRounded';
 import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
-import { useStateValue } from '../StateProvider';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../features/userSlice';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import { auth } from '../firebase';
 
 function Header() {
-  const [{ user }, dispatch] = useStateValue();
+  const user = useSelector(selectUser);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  // const [{ user }, dispatch] = useStateValue();
   return (
     <div className="header">
       {/* Left Header */}
@@ -30,12 +45,27 @@ function Header() {
       {/* Right Header */}
       <div className="header__right">
         <div className="header__info">
-          <Avatar src={user.photoURL} />
+          <Avatar src={user.photo} />
           <h4>{user.displayName}</h4>
         </div>
-        <IconButton>
+        <IconButton
+          aria-controls="simple-menu"
+          aria-haspopup="true"
+          onClick={handleClick}
+        >
           <AddRoundedIcon />
         </IconButton>
+        <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={handleClose}>Profile</MenuItem>
+          <MenuItem onClick={handleClose}>My account</MenuItem>
+          <MenuItem onClick={() => auth.signOut()}>Logout</MenuItem>
+        </Menu>
         <IconButton>
           <ForumRoundedIcon />
         </IconButton>

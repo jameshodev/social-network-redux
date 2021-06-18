@@ -4,12 +4,15 @@ import Avatar from '@material-ui/core/Avatar';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
-import { useStateValue } from '../StateProvider';
+// import { useStateValue } from '../StateProvider';
 import db from '../firebase';
 import firebase from 'firebase';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../features/userSlice';
 
 function MessageSender() {
-  const [{ user }, dispatch] = useStateValue();
+  // const [{ user }, dispatch] = useStateValue();
+  const user = useSelector(selectUser);
   const [input, setInput] = useState('');
   const [imageUrl, setImageUrl] = useState('');
 
@@ -33,7 +36,7 @@ function MessageSender() {
   return (
     <div className="messageSender">
       <div className="messageSender__top">
-        <Avatar src={user.photoURL} />
+        <Avatar src={user.photo} />
         <form>
           <input
             value={input}

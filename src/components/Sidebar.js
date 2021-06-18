@@ -6,13 +6,15 @@ import PeopleIcon from '@material-ui/icons/People';
 import ChatIcon from '@material-ui/icons/Chat';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { useStateValue } from '../StateProvider';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../features/userSlice';
 
 function Sidebar() {
-  const [{ user }, dispatch] = useStateValue();
+  const user = useSelector(selectUser);
+  // const [{ user }, dispatch] = useStateValue();
   return (
     <div className="sidebar">
-      <SidebarRow src={user.photoURL} title={user.displayName} />
+      <SidebarRow src={user.photo} title={user.displayName} />
       <SidebarRow
         Icon={LocalHospitalIcon}
         title="COVID-19 Information Center"
