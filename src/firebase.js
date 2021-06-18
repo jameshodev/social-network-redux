@@ -2,13 +2,12 @@
 import firebase from 'firebase';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyBwvnkmiDGClX1l18cJ7Z_G57se9g9xKbY',
-  authDomain: 'social-network-93633.firebaseapp.com',
-  projectId: 'social-network-93633',
-  storageBucket: 'social-network-93633.appspot.com',
-  messagingSenderId: '620160714894',
-  appId: '1:620160714894:web:30437ab551c4bd352561df',
-  measurementId: 'G-3YTE9KLJ5T',
+  apiKey: 'AIzaSyBQdEaBqqwRz00fq8zXl-lq1TaKfSTexcE',
+  authDomain: 'social-network-redux.firebaseapp.com',
+  projectId: 'social-network-redux',
+  storageBucket: 'social-network-redux.appspot.com',
+  messagingSenderId: '62300233164',
+  appId: '1:62300233164:web:6a3f0d66bc9ebd43bc9169',
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
